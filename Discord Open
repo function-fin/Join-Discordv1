@@ -23,14 +23,14 @@ end
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "ProjectSpawnismo_DiscordGUI"
 ScreenGui.ResetOnSpawn = false
-ScreenGui.DisplayOrder = 99999 -- Prioridade Máxima
+ScreenGui.DisplayOrder = 2147483647 -- Prioridade máxima absoluta na tela
 ScreenGui.Parent = PlayerGui
 
--- Main Frame (Janela Principal)
+-- Main Frame (Janela Principal com Display Maior)
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
-MainFrame.Size = UDim2.new(0, 460, 0, 285)
-MainFrame.Position = UDim2.new(0.5, -230, 0.5, -142)
+MainFrame.Size = UDim2.new(0, 520, 0, 320)
+MainFrame.Position = UDim2.new(0.5, -260, 0.5, -160)
 MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 MainFrame.BorderSizePixel = 0
 MainFrame.Active = true
@@ -38,33 +38,33 @@ MainFrame.Parent = ScreenGui
 
 local UIStroke = Instance.new("UIStroke")
 UIStroke.Color = Color3.fromRGB(255, 255, 255)
-UIStroke.Thickness = 2
+UIStroke.Thickness = 2.5
 UIStroke.Parent = MainFrame
 
 -- Topo Esquerdo: Ícone do Discord
 local TopDiscordIcon = Instance.new("ImageLabel")
-TopDiscordIcon.Size = UDim2.new(0, 41, 0, 28)
-TopDiscordIcon.Position = UDim2.new(0, 18, 0, 14)
+TopDiscordIcon.Size = UDim2.new(0, 46, 0, 31)
+TopDiscordIcon.Position = UDim2.new(0, 20, 0, 15)
 TopDiscordIcon.BackgroundTransparency = 1
 TopDiscordIcon.Image = ID_TOP_DISCORD
 TopDiscordIcon.Parent = MainFrame
 
 -- Título Principal
 local TitleLabel = Instance.new("TextLabel")
-TitleLabel.Size = UDim2.new(0, 290, 0, 23)
-TitleLabel.Position = UDim2.new(0, 69, 0, 16)
+TitleLabel.Size = UDim2.new(0, 330, 0, 26)
+TitleLabel.Position = UDim2.new(0, 76, 0, 18)
 TitleLabel.BackgroundTransparency = 1
 TitleLabel.Text = "| DISCORD DO SERVIDOR"
 TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TitleLabel.Font = Enum.Font.Arcade
-TitleLabel.TextSize = 16
+TitleLabel.TextSize = 18
 TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
 TitleLabel.Parent = MainFrame
 
--- Botão Fechar X (Apenas a Imagem com o tamanho grande correto)
+-- Botão Fechar X
 local CloseButton = Instance.new("ImageButton")
-CloseButton.Size = UDim2.new(0, 34, 0, 34)
-CloseButton.Position = UDim2.new(1, -50, 0, 10)
+CloseButton.Size = UDim2.new(0, 36, 0, 36)
+CloseButton.Position = UDim2.new(1, -52, 0, 12)
 CloseButton.BackgroundTransparency = 1
 CloseButton.Image = ID_CLOSE_BTN
 CloseButton.Parent = MainFrame
@@ -75,47 +75,47 @@ end)
 
 -- Linha Divisória Superior
 local TopDivider = Instance.new("Frame")
-TopDivider.Size = UDim2.new(1, -36, 0, 1)
-TopDivider.Position = UDim2.new(0, 18, 0, 52)
+TopDivider.Size = UDim2.new(1, -40, 0, 1)
+TopDivider.Position = UDim2.new(0, 20, 0, 58)
 TopDivider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TopDivider.BorderSizePixel = 0
 TopDivider.Parent = MainFrame
 
 -- Bloco Esquerdo (Logo Central e Slogan)
 local LeftContainer = Instance.new("Frame")
-LeftContainer.Size = UDim2.new(0, 115, 0, 150)
-LeftContainer.Position = UDim2.new(0, 18, 0, 63)
+LeftContainer.Size = Instance.new("Frame") and UDim2.new(0, 130, 0, 165)
+LeftContainer.Position = UDim2.new(0, 20, 0, 70)
 LeftContainer.BackgroundTransparency = 1
 LeftContainer.Parent = MainFrame
 
 local EmblemIcon = Instance.new("ImageLabel")
-EmblemIcon.Size = UDim2.new(0, 98, 0, 98)
-EmblemIcon.Position = UDim2.new(0.5, -49, 0, 0)
+EmblemIcon.Size = UDim2.new(0, 110, 0, 110)
+EmblemIcon.Position = UDim2.new(0.5, -55, 0, 0)
 EmblemIcon.BackgroundTransparency = 1
 EmblemIcon.Image = ID_LOGO_CENTRAL
 EmblemIcon.Parent = LeftContainer
 
 local SubText = Instance.new("TextLabel")
-SubText.Size = UDim2.new(1, 0, 0, 29)
-SubText.Position = UDim2.new(0, 0, 0, 109)
+SubText.Size = UDim2.new(1, 0, 0, 32)
+SubText.Position = UDim2.new(0, 0, 0, 116)
 SubText.BackgroundTransparency = 1
-SubText.Text = "COMUNIDADE PROJECT SPWAN"
+SubText.Text = "COMUNIDADE PROJECT SPAWN"
 SubText.TextColor3 = Color3.fromRGB(255, 255, 255)
 SubText.Font = Enum.Font.Arcade
-SubText.TextSize = 9
+SubText.TextSize = 9.5
 SubText.TextWrapped = true
 SubText.TextXAlignment = Enum.TextXAlignment.Center
 SubText.Parent = LeftContainer
 
 -- Bloco Central-Direito (Descrição do Projeto)
 local DescLabel = Instance.new("TextLabel")
-DescLabel.Size = UDim2.new(0, 305, 0, 69)
-DescLabel.Position = UDim2.new(0, 138, 0, 63)
+DescLabel.Size = UDim2.new(0, 335, 0, 75)
+DescLabel.Position = UDim2.new(0, 155, 0, 70)
 DescLabel.BackgroundTransparency = 1
 DescLabel.Text = "O servidor Discord do Project Spawn é um espaço em desenvolvimento que busca reunir uma comunidade de pessoas curiosas, desenvolvedoras e vibe coding. Aqui, o foco é o desenvolvimento de projetos, design, criatividade e conversas sobre a comunidade de scripting do Roblox."
 DescLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 DescLabel.Font = Enum.Font.Arcade
-DescLabel.TextSize = 9.2
+DescLabel.TextSize = 10
 DescLabel.TextWrapped = true
 DescLabel.TextXAlignment = Enum.TextXAlignment.Left
 DescLabel.TextYAlignment = Enum.TextYAlignment.Top
@@ -123,46 +123,46 @@ DescLabel.Parent = MainFrame
 
 -- Cards Informativos
 local cardsData = {
-    {icon = ID_COMUNIDADE,  title = "COMUNIDADE",  desc = "Gente Interessada e Ativa",             x = 138},
-    {icon = ID_VIBE_CODING, title = "VIBE CODING", desc = "Compartilhe e Aprenda",                x = 218},
-    {icon = ID_PROJETOS,    title = "PROJETOS",    desc = "New Ideas e PROJECT.S",              x = 299},
-    {icon = ID_CONVERSAS,   title = "CONVERSAS",   desc = "Sobre O Roblox e Comunidade SCRIPT",   x = 379},
+    {icon = ID_COMUNIDADE,  title = "COMUNIDADE",  desc = "Gente Interessada e Ativa",             x = 155},
+    {icon = ID_VIBE_CODING, title = "VIBE CODING", desc = "Compartilhe e Aprenda",                x = 244},
+    {icon = ID_PROJETOS,    title = "PROJETOS",    desc = "New Ideas e PROJECT.S",              x = 333},
+    {icon = ID_CONVERSAS,   title = "CONVERSAS",   desc = "Sobre O Roblox e Comunidade SCRIPT",   x = 422},
 }
 
 for i, data in ipairs(cardsData) do
     local cardContainer = Instance.new("Frame")
-    cardContainer.Size = UDim2.new(0, 75, 0, 104)
-    cardContainer.Position = UDim2.new(0, data.x, 0, 132)
+    cardContainer.Size = UDim2.new(0, 82, 0, 115)
+    cardContainer.Position = UDim2.new(0, data.x, 0, 146)
     cardContainer.BackgroundTransparency = 1
     cardContainer.Parent = MainFrame
 
     local cardIcon = Instance.new("ImageLabel")
-    cardIcon.Size = UDim2.new(0, 52, 0, 52)
-    cardIcon.Position = UDim2.new(0.5, -26, 0, 0)
+    cardIcon.Size = UDim2.new(0, 56, 0, 56)
+    cardIcon.Position = UDim2.new(0.5, -28, 0, 0)
     cardIcon.BackgroundTransparency = 1
     cardIcon.Image = data.icon
     cardIcon.Parent = cardContainer
 
     local cardTitle = Instance.new("TextLabel")
-    cardTitle.Size = UDim2.new(1, 0, 0, 14)
-    cardTitle.Position = UDim2.new(0, 0, 0, 58)
+    cardTitle.Size = UDim2.new(1, 0, 0, 16)
+    cardTitle.Position = UDim2.new(0, 0, 0, 62)
     cardTitle.BackgroundTransparency = 1
     cardTitle.Text = data.title
     cardTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
     cardTitle.Font = Enum.Font.Arcade
-    cardTitle.TextSize = 9
+    cardTitle.TextSize = 9.5
     cardTitle.TextWrapped = true
     cardTitle.TextXAlignment = Enum.TextXAlignment.Center
     cardTitle.Parent = cardContainer
 
     local cardDesc = Instance.new("TextLabel")
-    cardDesc.Size = UDim2.new(1, 6, 0, 29)
-    cardDesc.Position = UDim2.new(0, -3, 0, 74)
+    cardDesc.Size = UDim2.new(1, 6, 0, 32)
+    cardDesc.Position = UDim2.new(0, -3, 0, 79)
     cardDesc.BackgroundTransparency = 1
     cardDesc.Text = data.desc
     cardDesc.TextColor3 = Color3.fromRGB(220, 220, 220)
     cardDesc.Font = Enum.Font.Arcade
-    cardDesc.TextSize = 8.6
+    cardDesc.TextSize = 9
     cardDesc.TextWrapped = true
     cardDesc.TextXAlignment = Enum.TextXAlignment.Center
     cardDesc.TextYAlignment = Enum.TextYAlignment.Top
@@ -171,8 +171,8 @@ for i, data in ipairs(cardsData) do
     -- Linhas Divisórias Verticais entre os cards
     if i < #cardsData then
         local CardDivider = Instance.new("Frame")
-        CardDivider.Size = UDim2.new(0, 1, 0, 69)
-        CardDivider.Position = UDim2.new(0, data.x + 76, 0, 138)
+        CardDivider.Size = UDim2.new(0, 1, 0, 75)
+        CardDivider.Position = UDim2.new(0, data.x + 84, 0, 152)
         CardDivider.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
         CardDivider.BorderSizePixel = 0
         CardDivider.Parent = MainFrame
@@ -184,8 +184,8 @@ end
 -- =========================================================================
 local JoinButton = Instance.new("TextButton")
 JoinButton.Name = "JoinButton"
-JoinButton.Size = UDim2.new(1, -36, 0, 39)
-JoinButton.Position = UDim2.new(0, 18, 0, 233)
+JoinButton.Size = UDim2.new(1, -40, 0, 42)
+JoinButton.Position = UDim2.new(0, 20, 0, 260)
 JoinButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 JoinButton.BorderSizePixel = 0
 JoinButton.Text = ""
@@ -219,7 +219,7 @@ UIListLayout.Parent = ButtonContentContainer
 
 local BtnDiscordIcon = Instance.new("ImageLabel")
 BtnDiscordIcon.Name = "DiscordIcon"
-BtnDiscordIcon.Size = UDim2.new(0, 25, 0, 18)
+BtnDiscordIcon.Size = UDim2.new(0, 26, 0, 19)
 BtnDiscordIcon.BackgroundTransparency = 1
 BtnDiscordIcon.Image = ID_TOP_DISCORD
 BtnDiscordIcon.LayoutOrder = 1
@@ -228,12 +228,12 @@ BtnDiscordIcon.Parent = ButtonContentContainer
 
 local BtnText = Instance.new("TextLabel")
 BtnText.Name = "BtnText"
-BtnText.Size = UDim2.new(0, 260, 1, 0)
+BtnText.Size = UDim2.new(0, 280, 1, 0)
 BtnText.BackgroundTransparency = 1
 BtnText.Text = "COLETAR LINK DO DISCORD"
 BtnText.TextColor3 = Color3.fromRGB(255, 255, 255)
 BtnText.Font = Enum.Font.Arcade
-BtnText.TextSize = 15
+BtnText.TextSize = 16
 BtnText.TextXAlignment = Enum.TextXAlignment.Center
 BtnText.LayoutOrder = 2
 BtnText.ZIndex = 3
@@ -241,7 +241,7 @@ BtnText.Parent = ButtonContentContainer
 
 local ArrowIndicator = Instance.new("TextLabel")
 ArrowIndicator.Size = UDim2.new(0, 35, 1, 0)
-ArrowIndicator.Position = UDim2.new(1, -40, 0, 0)
+ArrowIndicator.Position = UDim2.new(1, -42, 0, 0)
 ArrowIndicator.BackgroundTransparency = 1
 ArrowIndicator.Text = "→"
 ArrowIndicator.TextColor3 = Color3.fromRGB(255, 255, 255)
