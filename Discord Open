@@ -12,21 +12,26 @@ local ID_CLOSE_BTN     = "rbxassetid://78774633521849"
 -- Serviços
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
+local CoreGui = game:GetService("CoreGui")
 
 local LocalPlayer = Players.LocalPlayer
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
-if PlayerGui:FindFirstChild("ProjectSpawnismo_DiscordGUI") then
-    PlayerGui["ProjectSpawnismo_DiscordGUI"]:Destroy()
+-- Define o local correto exatamente igual ao SPWN CLIENT (Prioriza CoreGui / gethui)
+local targetParent = (gethui and gethui()) or (pcall(function() return CoreGui end) and CoreGui) or LocalPlayer:WaitForChild("PlayerGui")
+
+if targetParent:FindFirstChild("ProjectSpawnismo_DiscordGUI") then
+    targetParent["ProjectSpawnismo_DiscordGUI"]:Destroy()
 end
 
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "ProjectSpawnismo_DiscordGUI"
 ScreenGui.ResetOnSpawn = false
-ScreenGui.DisplayOrder = 2147483647 -- Prioridade máxima absoluta na tela
-ScreenGui.Parent = PlayerGui
+ScreenGui.IgnoreGuiInset = true
+ScreenGui.DisplayOrder = 2147483647 -- LIMITE MÁXIMO DO ROBLOX (Supera o DisplayOrder = 1 do SPWN CLIENT)
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.Parent = targetParent
 
--- Main Frame (Janela Principal com Display Maior)
+-- Main Frame (Janela Principal)
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
 MainFrame.Size = UDim2.new(0, 520, 0, 320)
@@ -34,6 +39,7 @@ MainFrame.Position = UDim2.new(0.5, -260, 0.5, -160)
 MainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 MainFrame.BorderSizePixel = 0
 MainFrame.Active = true
+MainFrame.ZIndex = 100 -- ZIndex elevado para sobreposição interna
 MainFrame.Parent = ScreenGui
 
 local UIStroke = Instance.new("UIStroke")
@@ -47,6 +53,7 @@ TopDiscordIcon.Size = UDim2.new(0, 46, 0, 31)
 TopDiscordIcon.Position = UDim2.new(0, 20, 0, 15)
 TopDiscordIcon.BackgroundTransparency = 1
 TopDiscordIcon.Image = ID_TOP_DISCORD
+TopDiscordIcon.ZIndex = 101
 TopDiscordIcon.Parent = MainFrame
 
 -- Título Principal
@@ -59,6 +66,7 @@ TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TitleLabel.Font = Enum.Font.Arcade
 TitleLabel.TextSize = 18
 TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
+TitleLabel.ZIndex = 101
 TitleLabel.Parent = MainFrame
 
 -- Botão Fechar X
@@ -67,6 +75,7 @@ CloseButton.Size = UDim2.new(0, 36, 0, 36)
 CloseButton.Position = UDim2.new(1, -52, 0, 12)
 CloseButton.BackgroundTransparency = 1
 CloseButton.Image = ID_CLOSE_BTN
+CloseButton.ZIndex = 102
 CloseButton.Parent = MainFrame
 
 CloseButton.MouseButton1Click:Connect(function()
@@ -79,13 +88,15 @@ TopDivider.Size = UDim2.new(1, -40, 0, 1)
 TopDivider.Position = UDim2.new(0, 20, 0, 58)
 TopDivider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 TopDivider.BorderSizePixel = 0
+TopDivider.ZIndex = 101
 TopDivider.Parent = MainFrame
 
 -- Bloco Esquerdo (Logo Central e Slogan)
 local LeftContainer = Instance.new("Frame")
-LeftContainer.Size = Instance.new("Frame") and UDim2.new(0, 130, 0, 165)
+LeftContainer.Size = UDim2.new(0, 130, 0, 165)
 LeftContainer.Position = UDim2.new(0, 20, 0, 70)
 LeftContainer.BackgroundTransparency = 1
+LeftContainer.ZIndex = 101
 LeftContainer.Parent = MainFrame
 
 local EmblemIcon = Instance.new("ImageLabel")
@@ -93,6 +104,7 @@ EmblemIcon.Size = UDim2.new(0, 110, 0, 110)
 EmblemIcon.Position = UDim2.new(0.5, -55, 0, 0)
 EmblemIcon.BackgroundTransparency = 1
 EmblemIcon.Image = ID_LOGO_CENTRAL
+EmblemIcon.ZIndex = 102
 EmblemIcon.Parent = LeftContainer
 
 local SubText = Instance.new("TextLabel")
@@ -105,6 +117,7 @@ SubText.Font = Enum.Font.Arcade
 SubText.TextSize = 9.5
 SubText.TextWrapped = true
 SubText.TextXAlignment = Enum.TextXAlignment.Center
+SubText.ZIndex = 102
 SubText.Parent = LeftContainer
 
 -- Bloco Central-Direito (Descrição do Projeto)
@@ -119,6 +132,7 @@ DescLabel.TextSize = 10
 DescLabel.TextWrapped = true
 DescLabel.TextXAlignment = Enum.TextXAlignment.Left
 DescLabel.TextYAlignment = Enum.TextYAlignment.Top
+DescLabel.ZIndex = 101
 DescLabel.Parent = MainFrame
 
 -- Cards Informativos
@@ -134,6 +148,7 @@ for i, data in ipairs(cardsData) do
     cardContainer.Size = UDim2.new(0, 82, 0, 115)
     cardContainer.Position = UDim2.new(0, data.x, 0, 146)
     cardContainer.BackgroundTransparency = 1
+    cardContainer.ZIndex = 101
     cardContainer.Parent = MainFrame
 
     local cardIcon = Instance.new("ImageLabel")
@@ -141,6 +156,7 @@ for i, data in ipairs(cardsData) do
     cardIcon.Position = UDim2.new(0.5, -28, 0, 0)
     cardIcon.BackgroundTransparency = 1
     cardIcon.Image = data.icon
+    cardIcon.ZIndex = 102
     cardIcon.Parent = cardContainer
 
     local cardTitle = Instance.new("TextLabel")
@@ -153,6 +169,7 @@ for i, data in ipairs(cardsData) do
     cardTitle.TextSize = 9.5
     cardTitle.TextWrapped = true
     cardTitle.TextXAlignment = Enum.TextXAlignment.Center
+    cardTitle.ZIndex = 102
     cardTitle.Parent = cardContainer
 
     local cardDesc = Instance.new("TextLabel")
@@ -166,15 +183,16 @@ for i, data in ipairs(cardsData) do
     cardDesc.TextWrapped = true
     cardDesc.TextXAlignment = Enum.TextXAlignment.Center
     cardDesc.TextYAlignment = Enum.TextYAlignment.Top
+    cardDesc.ZIndex = 102
     cardDesc.Parent = cardContainer
 
-    -- Linhas Divisórias Verticais entre os cards
     if i < #cardsData then
         local CardDivider = Instance.new("Frame")
         CardDivider.Size = UDim2.new(0, 1, 0, 75)
         CardDivider.Position = UDim2.new(0, data.x + 84, 0, 152)
         CardDivider.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
         CardDivider.BorderSizePixel = 0
+        CardDivider.ZIndex = 101
         CardDivider.Parent = MainFrame
     end
 end
@@ -190,23 +208,21 @@ JoinButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 JoinButton.BorderSizePixel = 0
 JoinButton.Text = ""
 JoinButton.AutoButtonColor = false
-JoinButton.ZIndex = 2
+JoinButton.ZIndex = 102
 JoinButton.Parent = MainFrame
 
--- Borda Branca do Botão Inferior
 local BtnStroke = Instance.new("UIStroke")
 BtnStroke.Color = Color3.fromRGB(255, 255, 255)
 BtnStroke.Thickness = 2
 BtnStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 BtnStroke.Parent = JoinButton
 
--- Container Central (Agrupa o Ícone e o Texto perfeitamente centralizados)
 local ButtonContentContainer = Instance.new("Frame")
 ButtonContentContainer.Name = "ContentContainer"
 ButtonContentContainer.Size = UDim2.new(0, 0, 1, 0)
 ButtonContentContainer.Position = UDim2.new(0.5, 0, 0, 0)
 ButtonContentContainer.BackgroundTransparency = 1
-ButtonContentContainer.ZIndex = 3
+ButtonContentContainer.ZIndex = 103
 ButtonContentContainer.Parent = JoinButton
 
 local UIListLayout = Instance.new("UIListLayout")
@@ -223,7 +239,7 @@ BtnDiscordIcon.Size = UDim2.new(0, 26, 0, 19)
 BtnDiscordIcon.BackgroundTransparency = 1
 BtnDiscordIcon.Image = ID_TOP_DISCORD
 BtnDiscordIcon.LayoutOrder = 1
-BtnDiscordIcon.ZIndex = 3
+BtnDiscordIcon.ZIndex = 103
 BtnDiscordIcon.Parent = ButtonContentContainer
 
 local BtnText = Instance.new("TextLabel")
@@ -236,7 +252,7 @@ BtnText.Font = Enum.Font.Arcade
 BtnText.TextSize = 16
 BtnText.TextXAlignment = Enum.TextXAlignment.Center
 BtnText.LayoutOrder = 2
-BtnText.ZIndex = 3
+BtnText.ZIndex = 103
 BtnText.Parent = ButtonContentContainer
 
 local ArrowIndicator = Instance.new("TextLabel")
@@ -247,7 +263,7 @@ ArrowIndicator.Text = "→"
 ArrowIndicator.TextColor3 = Color3.fromRGB(255, 255, 255)
 ArrowIndicator.Font = Enum.Font.Arcade
 ArrowIndicator.TextSize = 18
-ArrowIndicator.ZIndex = 3
+ArrowIndicator.ZIndex = 103
 ArrowIndicator.Parent = JoinButton
 
 JoinButton.MouseButton1Click:Connect(function()
